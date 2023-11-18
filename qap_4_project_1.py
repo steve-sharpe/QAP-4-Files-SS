@@ -86,8 +86,8 @@ NumCars = 2
 LiabilityOption = "Y"
 GlassOption = "Y"
 LoanerOption = "Y"
-PayOption = "D"
-DownPayment = 100.00
+PayOption = "M"
+DownPayment = 1000.00
 PrevClaimAmtLst = [1000.00, 500.00, 250.00]
 PrevClaimDateLst = ["2021-01-01", "2021-02-01", "2021-03-01"]
 
@@ -259,25 +259,44 @@ PrevClaimDateLst = ["2021-01-01", "2021-02-01", "2021-03-01"]
 #         break
 #     break
 
-print("***********************************************************************")
+print("***********************************************************")
 print(
-    f"*****  Policy Number: {NextPolicyNum}  **********  Invoice Date: {FF.FDateS(INV_DATE)}  *****"
+    f"**  Policy Number: {NextPolicyNum}  ****  Invoice Date: {FF.FDateS(INV_DATE)}  **"
 )
-print("***********************************************************************")
+print("***********************************************************")
+CustDSP = f"{CustFirstName} {CustLastName}"
+print(f"**  Customer:  {CustDSP}{''.rjust(24 - len(CustDSP))} *Selections*     **")
+print(f"**  Address:   {StrAdd}{'# of Cars:'.rjust(35 - len(StrAdd))} {NumCars}     **")
+CityProvDSP = f"{City}, {Province}"
 print(
-    f"**  Customer:  {CustFirstName} {CustLastName}             # of Cars: {NumCars} "
+    f"**             {CityProvDSP}{'Liability:'.rjust(35 - len(CityProvDSP))} {LiabilityOption}     **"
 )
 print(
-    f"**  Address:   {StrAdd}{'Liability:'.rjust(50 - len(StrAdd))} {LiabilityOption}"
+    f"**             {PostalCode}{'Glass:    '.rjust(35 - len(PostalCode))} {GlassOption}     **"
 )
-print(f"**             {City}, {Province:<15}Glass:     {GlassOption} ")
-print(f"**             {PostalCode:<20}Loaner:    {LoanerOption} ")
-print()
-print(f"**  Phone:   {Phone}")
-print(f"Number of Cars: {NumCars}")
-print(f"Optional Extra Liability: {LiabilityOption}")
-print(f"Optional Glass Coverage: {GlassOption}")
-print(f"Optional Loaner Car Coverage: {LoanerOption}")
+print(
+    f"**  Phone:     {Phone}{'Loaner:   '.rjust(35 - len(Phone))} {LoanerOption}     **"
+)
+print("***********************************************************")
+while True:
+    if PayOption == "F":
+        print(f"**          You have selected to pay in FULL             **")
+        break
+    elif PayOption == "M":
+        print(f"**          You have selected to pay MONTHLY             **")
+        break
+    elif PayOption == "D":
+        print(
+            f"**           You have selected to pay MONTHLY.{' ' * (14 - len('You have selected to pay MONTHLY.'))}           **"
+        )
+        down_payment_str = FF.FDollar2(DownPayment)
+        print(
+            f"**            Your down payment is {down_payment_str}.{' ' * (13 - len(down_payment_str))}        **"
+        )
+        break
+
+print("***********************************************************")
+
 print(f"Payment Option: {PayOption}")
 print(f"Down Payment: {FF.FDollar2(DownPayment)}")
 print(f"Previous Claims: {PrevClaimAmtLst}")
