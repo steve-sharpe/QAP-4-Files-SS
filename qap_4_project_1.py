@@ -86,7 +86,7 @@ NumCars = 2
 LiabilityOption = "Y"
 GlassOption = "Y"
 LoanerOption = "Y"
-PayOption = "M"
+PayOption = "D"
 DownPayment = 1000.00
 PrevClaimAmtLst = [1000.00, 500.00, 250.00]
 PrevClaimDateLst = ["2021-01-01", "2021-02-01", "2021-03-01"]
@@ -259,6 +259,11 @@ PrevClaimDateLst = ["2021-01-01", "2021-02-01", "2021-03-01"]
 #         break
 #     break
 
+print()
+print("***********************************************************")
+print("**                                                       **")
+print("**              ONE STOP INSURANCE COMPANY               **")
+print("**                                                       **")
 print("***********************************************************")
 print(
     f"**  Policy Number: {NextPolicyNum}  ****  Invoice Date: {FF.FDateS(INV_DATE)}  **"
@@ -296,6 +301,25 @@ while True:
         break
 
 print("***********************************************************")
+print(
+    f"**             Insurance Premium:  {FF.FDollar2(InsurPremium(NumCars))}{''.rjust(21 - len(FF.FDollar2(InsurPremium(NumCars))))} **"
+)
+print(
+    f"**             Extra Costs:          {FF.FDollar2(ExtraCosts(LiabilityOption, GlassOption, LoanerOption))}{''.rjust(19 - len(FF.FDollar2(ExtraCosts(LiabilityOption, GlassOption, LoanerOption))))} **"
+)
+
+print(
+    f"**             Subtotal:           {FF.FDollar2(InsurPremium(NumCars) + ExtraCosts(LiabilityOption, GlassOption, LoanerOption))}{''.rjust(21 - len(FF.FDollar2(InsurPremium(NumCars) + ExtraCosts(LiabilityOption, GlassOption, LoanerOption))))} **"
+)
+
+subtitle_cost = InsurPremium(NumCars) + ExtraCosts(
+    LiabilityOption, GlassOption, LoanerOption
+)
+subtitle_cost_str = FF.FDollar2(subtitle_cost)
+padding = " " * (21 - len(subtitle_cost_str))
+
+print(f"**             Subtitle:           {subtitle_cost_str}{padding} **")
+
 
 print(f"Payment Option: {PayOption}")
 print(f"Down Payment: {FF.FDollar2(DownPayment)}")
