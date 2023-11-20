@@ -47,7 +47,7 @@ def CalcHST(HST_RATE, InsurPremium, ExtraCosts):
 
 
 def TotalCost(InsurPremium, ExtraCosts, HST, DownPayment):
-    # Function to calculate the total cost including down payment.
+    # Function to calculate the total cost wity down payment.
     TotalCost = (InsurPremium + ExtraCosts + HST) - DownPayment
     return TotalCost
 
@@ -87,7 +87,7 @@ LiabilityOption = "Y"
 GlassOption = "Y"
 LoanerOption = "Y"
 PayOption = "D"
-DownPayment = 1000.00
+DownPayment = 00.00
 PrevClaimAmtLst = [1000.00, 500.00, 250.00]
 PrevClaimDateLst = ["2021-01-01", "2021-02-01", "2021-03-01"]
 
@@ -261,9 +261,9 @@ PrevClaimDateLst = ["2021-01-01", "2021-02-01", "2021-03-01"]
 
 print()
 print("***********************************************************")
-print("**                                                       **")
-print("**              ONE STOP INSURANCE COMPANY               **")
-print("**                                                       **")
+print("**       ~-~                                             **")
+print("**      | 1 |   ONE STOP INSURANCE COMPANY               **")
+print("**       ~-~                                             **")
 print("***********************************************************")
 print(
     f"**  Policy Number: {NextPolicyNum}  ****  Invoice Date: {FF.FDateS(INV_DATE)}  **"
@@ -301,27 +301,52 @@ while True:
         break
 
 print("***********************************************************")
-print(
-    f"**             Insurance Premium:  {FF.FDollar2(InsurPremium(NumCars))}{''.rjust(21 - len(FF.FDollar2(InsurPremium(NumCars))))} **"
-)
-print(
-    f"**             Extra Costs:          {FF.FDollar2(ExtraCosts(LiabilityOption, GlassOption, LoanerOption))}{''.rjust(19 - len(FF.FDollar2(ExtraCosts(LiabilityOption, GlassOption, LoanerOption))))} **"
-)
+insurance_premium = InsurPremium(NumCars)
+insurance_premium_str = FF.FDollar2(insurance_premium)
+print(f"**             Insurance Premium:  {insurance_premium_str:>9}             **")
 
-print(
-    f"**             Subtotal:           {FF.FDollar2(InsurPremium(NumCars) + ExtraCosts(LiabilityOption, GlassOption, LoanerOption))}{''.rjust(21 - len(FF.FDollar2(InsurPremium(NumCars) + ExtraCosts(LiabilityOption, GlassOption, LoanerOption))))} **"
-)
+extra_costs = ExtraCosts(LiabilityOption, GlassOption, LoanerOption)
+extra_costs_str = FF.FDollar2(extra_costs)
+print(f"**             Extra Costs:        {extra_costs_str:>9}             **")
 
-subtitle_cost = InsurPremium(NumCars) + ExtraCosts(
+subtotal = InsurPremium(NumCars) + ExtraCosts(
     LiabilityOption, GlassOption, LoanerOption
 )
-subtitle_cost_str = FF.FDollar2(subtitle_cost)
-padding = " " * (21 - len(subtitle_cost_str))
+subtotal_str = FF.FDollar2(subtotal)
+print(f"**             Subtotal:           {subtotal_str:>9}             **")
 
-print(f"**             Subtitle:           {subtitle_cost_str}{padding} **")
+hst = CalcHST(
+    HST_RATE,
+    InsurPremium(NumCars),
+    ExtraCosts(LiabilityOption, GlassOption, LoanerOption),
+)
+hst_str = FF.FDollar2(hst)
+print(f"**             HST:                {hst_str:>9}             **")
 
+total_cost = TotalCost(
+    InsurPremium(NumCars),
+    ExtraCosts(LiabilityOption, GlassOption, LoanerOption),
+    hst,
+    DownPayment,
+)
+total_cost_str = FF.FDollar2(total_cost)
+print(f"**             Total with Deposit: {total_cost_str:>9}             **")
 
-print(f"Payment Option: {PayOption}")
-print(f"Down Payment: {FF.FDollar2(DownPayment)}")
-print(f"Previous Claims: {PrevClaimAmtLst}")
-print(f"Previous Claim Dates: {PrevClaimDateLst}")
+monthly_cost = MonthlyCost(total_cost)
+monthly_cost_str = FF.FDollar2(monthly_cost)
+print(f"**             Monthly Payment:    {monthly_cost_str:>9}             **")
+
+print("***********************************************************")
+
+pay_date = CalcPayDate(INV_DATE)
+print(f"**             First Payment Date: {FF.FDateS(pay_date)}            **")
+print("***********************************************************")
+
+print(f"**                  Previous Claims:                     **")
+for i in range(len(PrevClaimAmtLst)):
+    claim_date_str = PrevClaimDateLst[i]
+    claim_amt_str = FF.FDollar2(PrevClaimAmtLst[i])
+    print(f"**                {claim_date_str} - {claim_amt_str:>9}                 **")
+
+print("***********************************************************")
+print()
