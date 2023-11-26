@@ -52,9 +52,9 @@ def PreCost(InsurPremium, ExtraCosts, HST):
     return PreCost
 
 
-def TotalCost(InsurPremium, ExtraCosts, HST, Deposit):
+def TotalCost(InsurPremium, ExtraCosts, HST, MONTHLY_PROC_FEES, Deposit):
     # Function to calculate the total cost wity down payment.
-    TotalCost = (InsurPremium + ExtraCosts + HST) - Deposit
+    TotalCost = (InsurPremium + ExtraCosts + HST + MONTHLY_PROC_FEES) - Deposit
     return TotalCost
 
 
@@ -83,213 +83,215 @@ def CalcPayDate(InvDate):
 print()
 
 
-# NextPolicyNum = "1944"
-# CustFirstName = "Sam"
-# CustLastName = "Myers"
-# StrAdd = "123 1st Ave"
-# City = "Rio"
-# Province = "ON"
-# PostalCode = "A1A 1A1"
-# Phone = "416-555-1234"
-# NumCars = 2
-# LiabilityOption = "Y"
-# GlassOption = "Y"
-# LoanerOption = "Y"
-# PayOption = "D"
-# Deposit = 1500.00
-# PrevClaimAmtLst = [1000.00, 500.00, 250.00]
-# PrevClaimDateLst = ["2021-01-01", "2021-02-01", "2021-03-01"]
+NextPolicyNum = "1944"
+CustFirstName = "Sam"
+CustLastName = "Myers"
+StrAdd = "123 1st Ave"
+City = "Rio"
+Province = "ON"
+PostalCode = "A1A 1A1"
+Phone = "416-555-1234"
+NumCars = 2
+LiabilityOption = "Y"
+GlassOption = "Y"
+LoanerOption = "Y"
+PayOption = "D"
+Deposit = 1500.00
+PrevClaimAmtLst = [1000.00, 500.00, 250.00]
+PrevClaimDateLst = ["2021-01-01", "2021-02-01", "2021-03-01"]
 
-while True:
-    NextPolicyNum = "1944"
-    while True:
-        CustFirstName = input("Enter the customer's first name: ").title()
-        if CustFirstName == "":
-            print("You must enter a first name.")
-        else:
-            break
+# while True:
+#     NextPolicyNum = "1944"
+#     while True:
+#         CustFirstName = input("Enter the customer's first name: ").title()
+#         if CustFirstName == "":
+#             print("You must enter a first name.")
+#         else:
+#             break
 
-    while True:
-        CustLastName = input("Enter the customer's last name: ").title()
-        if CustLastName == "":
-            print("You must enter a last name.")
-        else:
-            break
+#     while True:
+#         CustLastName = input("Enter the customer's last name: ").title()
+#         if CustLastName == "":
+#             print("You must enter a last name.")
+#         else:
+#             break
 
-    while True:
-        StrAdd = input("Enter the customer's street address: ").title()
-        if StrAdd == "":
-            print("You must enter a street address.")
-        else:
-            break
+#     while True:
+#         StrAdd = input("Enter the customer's street address: ").title()
+#         if StrAdd == "":
+#             print("You must enter a street address.")
+#         else:
+#             break
 
-    while True:
-        City = input("Enter the customer's city: ").title()
-        if City == "":
-            print("You must enter a city.")
-        else:
-            break
+#     while True:
+#         City = input("Enter the customer's city: ").title()
+#         if City == "":
+#             print("You must enter a city.")
+#         else:
+#             break
 
-    while True:
-        ProvList = [
-            "NL",
-            "NS",
-            "NB",
-            "PE",
-            "QC",
-            "ON",
-            "MB",
-            "SK",
-            "AB",
-            "BC",
-            "YT",
-            "NT",
-            "NU",
-        ]
-        Province = input("Enter the customer's province (XX): ").upper()
-        if Province == "":
-            print("You must enter a province.")
-        elif len(Province) != 2:
-            print("You must enter a province in XX format.")
-        elif Province not in ProvList:
-            print("You must enter a valid province.")
-        else:
-            break
+#     while True:
+#         ProvList = [
+#             "NL",
+#             "NS",
+#             "NB",
+#             "PE",
+#             "QC",
+#             "ON",
+#             "MB",
+#             "SK",
+#             "AB",
+#             "BC",
+#             "YT",
+#             "NT",
+#             "NU",
+#         ]
+#         Province = input("Enter the customer's province (XX): ").upper()
+#         if Province == "":
+#             print("You must enter a province.")
+#         elif len(Province) != 2:
+#             print("You must enter a province in XX format.")
+#         elif Province not in ProvList:
+#             print("You must enter a valid province.")
+#         else:
+#             break
 
-    while True:
-        PostalCode = input("Enter the customer's postal code (X9X 9X9): ").upper()
-        if PostalCode == "":
-            print("You must enter a postal code.")
-        elif len(PostalCode) != 7:
-            print("You must enter a postal code in X9X 9X9 format.")
-        elif PostalCode[3] != " ":
-            print("You must enter a postal code in X9X 9X9 format.")
-        elif (
-            PostalCode[0].isalpha() == False
-            or PostalCode[2].isalpha() == False
-            or PostalCode[5].isalpha() == False
-        ):
-            print("You must enter a postal code in X9X 9X9 format.")
-        elif (
-            PostalCode[1].isnumeric() == False
-            or PostalCode[4].isnumeric() == False
-            or PostalCode[6].isnumeric() == False
-        ):
-            print("You must enter a postal code in X9X 9X9 format.")
-        else:
-            break
+#     while True:
+#         PostalCode = input("Enter the customer's postal code (X9X 9X9): ").upper()
+#         if PostalCode == "":
+#             print("You must enter a postal code.")
+#         elif len(PostalCode) != 7:
+#             print("You must enter a postal code in X9X 9X9 format.")
+#         elif PostalCode[3] != " ":
+#             print("You must enter a postal code in X9X 9X9 format.")
+#         elif (
+#             PostalCode[0].isalpha() == False
+#             or PostalCode[2].isalpha() == False
+#             or PostalCode[5].isalpha() == False
+#         ):
+#             print("You must enter a postal code in X9X 9X9 format.")
+#         elif (
+#             PostalCode[1].isnumeric() == False
+#             or PostalCode[4].isnumeric() == False
+#             or PostalCode[6].isnumeric() == False
+#         ):
+#             print("You must enter a postal code in X9X 9X9 format.")
+#         else:
+#             break
 
-    while True:
-        Phone = input("Enter the customer's phone number (999-999-9999): ")
-        if Phone == "":
-            print("You must enter a phone number.")
-        elif len(Phone) != 12:
-            print("You must enter a phone number in 999-999-9999 format.")
-        elif Phone[3] != "-" or Phone[7] != "-":
-            print("You must enter a phone number in 999-999-9999 format.")
-        elif (
-            Phone[0:3].isnumeric() == False
-            or Phone[4:7].isnumeric() == False
-            or Phone[8:12].isnumeric() == False
-        ):
-            print("You must enter a phone number in 999-999-9999 format.")
-        else:
-            break
+#     while True:
+#         Phone = input("Enter the customer's phone number (999-999-9999): ")
+#         if Phone == "":
+#             print("You must enter a phone number.")
+#         elif len(Phone) != 12:
+#             print("You must enter a phone number in 999-999-9999 format.")
+#         elif Phone[3] != "-" or Phone[7] != "-":
+#             print("You must enter a phone number in 999-999-9999 format.")
+#         elif (
+#             Phone[0:3].isnumeric() == False
+#             or Phone[4:7].isnumeric() == False
+#             or Phone[8:12].isnumeric() == False
+#         ):
+#             print("You must enter a phone number in 999-999-9999 format.")
+#         else:
+#             break
 
-    while True:
-        NumCars = int(input("Enter the number of cars: "))
-        if NumCars == "":
-            print("You must enter a number of cars.")
-        elif int(NumCars) > 5:
-            print("Number cannot be greater than 5.")
-        elif int(NumCars) <= 0:
-            print("Number cannot be less than 1.")
-        else:
-            break
+#     while True:
+#         NumCars = int(input("Enter the number of cars: "))
+#         if NumCars == "":
+#             print("You must enter a number of cars.")
+#         elif int(NumCars) > 5:
+#             print("Number cannot be greater than 5.")
+#         elif int(NumCars) <= 0:
+#             print("Number cannot be less than 1.")
+#         else:
+#             break
 
-    while True:
-        LiabilityOption = input(
-            f"Would you like optional extra liability up to $1,000,000 at a cost of {FF.FDollar2( EXTRA_LIABILTY)} (Y or N)?: "
-        ).upper()
-        if LiabilityOption == "":
-            print("You must enter Y for YES or N for NO.")
-        elif LiabilityOption != "Y" and LiabilityOption != "N":
-            print("You must enter Y for YES or N for No.")
-        else:
-            break
+#     while True:
+#         LiabilityOption = input(
+#             f"Would you like optional extra liability up to $1,000,000 at a cost of {FF.FDollar2( EXTRA_LIABILTY)} (Y or N)?: "
+#         ).upper()
+#         if LiabilityOption == "":
+#             print("You must enter Y for YES or N for NO.")
+#         elif LiabilityOption != "Y" and LiabilityOption != "N":
+#             print("You must enter Y for YES or N for No.")
+#         else:
+#             break
 
-    while True:
-        GlassOption = input(
-            f"Would you like optional glass coverage at a cost of {FF.FDollar2(GLASS_COVERAGE)} (Y or N)?: "
-        ).upper()
-        if GlassOption == "":
-            print("You must enter Y for YES or N for NO.")
-        elif GlassOption != "Y" and GlassOption != "N":
-            print("You must enter Y for YES or N for No.")
-        else:
-            break
+#     while True:
+#         GlassOption = input(
+#             f"Would you like optional glass coverage at a cost of {FF.FDollar2(GLASS_COVERAGE)} (Y or N)?: "
+#         ).upper()
+#         if GlassOption == "":
+#             print("You must enter Y for YES or N for NO.")
+#         elif GlassOption != "Y" and GlassOption != "N":
+#             print("You must enter Y for YES or N for No.")
+#         else:
+#             break
 
-    while True:
-        LoanerOption = input(
-            f"Would you like optional loaner car coverage at a cost of {FF.FDollar2(LOANER_CAR_COVERAGE)} (Y or N)?: "
-        ).upper()
-        if LoanerOption == "":
-            print("You must enter Y for YES or N for NO.")
-        elif LoanerOption != "Y" and LoanerOption != "N":
-            print("You must enter Y for YES or N for No.")
-        else:
-            break
+#     while True:
+#         LoanerOption = input(
+#             f"Would you like optional loaner car coverage at a cost of {FF.FDollar2(LOANER_CAR_COVERAGE)} (Y or N)?: "
+#         ).upper()
+#         if LoanerOption == "":
+#             print("You must enter Y for YES or N for NO.")
+#         elif LoanerOption != "Y" and LoanerOption != "N":
+#             print("You must enter Y for YES or N for No.")
+#         else:
+#             break
 
-    while True:
-        PayList = ["F", "M", "D"]
-        PayOption = input(
-            "Would you like to pay in (F)ull, (M)onthly, or monthly with a (D)eposit (F, M, or D)?: "
-        ).upper()
-        if PayOption == "":
-            print("You must enter F for FULL, M for MONTHLY, or D for DEPOSIT.")
-        elif PayOption not in PayList:
-            print("You must enter F for FULL, M for MONTHLY, or D for DEPOSIT.")
-        elif PayOption == "D":
-            Deposit = float(input("Enter the deposit amount: "))
-            if Deposit < 0:
-                print("Deposit cannot be less than 0.")
-            else:
-                break
-        else:
-            break
+#     while True:
+#         PayList = ["F", "M", "D"]
+#         PayOption = input(
+#             "Would you like to pay in (F)ull, (M)onthly, or monthly with a (D)eposit (F, M, or D)?: "
+#         ).upper()
+#         if PayOption == "":
+#             print("You must enter F for FULL, M for MONTHLY, or D for DEPOSIT.")
+#         elif PayOption not in PayList:
+#             print("You must enter F for FULL, M for MONTHLY, or D for DEPOSIT.")
+#         elif PayOption == "D":
+#             Deposit = float(input("Enter the deposit amount: "))
+#             if Deposit < 0:
+#                 print("Deposit cannot be less than 0.")
+#             else:
+#                 break
+#         else:
+#             break
 
-    while True:
-        PrevClaimOption = input(
-            "Is there a previous claim to enter? (Y or N)?: "
-        ).upper()
-        while True:
-            PrevClaimAmtLst = []
-            PrevClaimDateLst = []
-            if PrevClaimOption == "":
-                print("You must enter Y for YES or N for NO.")
-            elif PrevClaimOption != "Y" and PrevClaimOption != "N":
-                print("You must enter Y for YES or N for No.")
-            elif PrevClaimOption == "Y":
-                PrevClaimAmt = input("Enter the previous claim amount in dollars: ")
-                PrevClaimDate = input("Enter the previous claim date (YYYY-MM-DD): ")
-                PrevClaimAmtLst.append(PrevClaimAmt)
-                PrevClaimDateLst.append(PrevClaimDate)
-                PrevClaimOption = input(
-                    "Is there another previous claim to enter? (Y or N)?: "
-                ).upper()
-                if PrevClaimOption == "":
-                    print("You must enter Y for YES or N for NO.")
-                elif PrevClaimOption != "Y" and PrevClaimOption != "N":
-                    print("You must enter Y for YES or N for No.")
-                if PrevClaimOption == "Y":
-                    continue
-                elif PrevClaimOption == "N":
-                    break
-            elif PrevClaimOption == "N":
-                break
-            break
-        break
-    break
+#     while True:
+#         PrevClaimOption = input(
+#             "Is there a previous claim to enter? (Y or N)?: "
+#         ).upper()
+#         while True:
+#             PrevClaimAmtLst = []
+#             PrevClaimDateLst = []
+#             if PrevClaimOption == "":
+#                 print("You must enter Y for YES or N for NO.")
+#             elif PrevClaimOption != "Y" and PrevClaimOption != "N":
+#                 print("You must enter Y for YES or N for No.")
+#             elif PrevClaimOption == "Y":
+#                 PrevClaimAmt = int(
+#                     input("Enter the previous claim amount in dollars: ")
+#                 )
+#                 PrevClaimDate = input("Enter the previous claim date (YYYY-MM-DD): ")
+#                 PrevClaimAmtLst.append(PrevClaimAmt)
+#                 PrevClaimDateLst.append(PrevClaimDate)
+#                 PrevClaimOption = input(
+#                     "Is there another previous claim to enter? (Y or N)?: "
+#                 ).upper()
+#                 if PrevClaimOption == "":
+#                     print("You must enter Y for YES or N for NO.")
+#                 elif PrevClaimOption != "Y" and PrevClaimOption != "N":
+#                     print("You must enter Y for YES or N for No.")
+#                 if PrevClaimOption == "Y":
+#                     continue
+#                 elif PrevClaimOption == "N":
+#                     break
+#             elif PrevClaimOption == "N":
+#                 break
+#             break
+#         break
+#     break
 
 print()
 print("**  --------------------------  **")
@@ -364,11 +366,15 @@ total_cost = TotalCost(
     InsurPremium(NumCars),
     ExtraCosts(LiabilityOption, GlassOption, LoanerOption),
     hst,
+    MONTHLY_PROC_FEES,
     Deposit,
 )
 
 deposit_str = FF.FDollar2(Deposit)
 print(f"**  Deposit: {deposit_str:>17}  **")
+
+process_fee_str = FF.FDollar2(MONTHLY_PROC_FEES)
+print(f"**  Process fee: {process_fee_str:>13}  **")
 
 total_cost_str = FF.FDollar2(total_cost)
 print(f"**  Final Total: {total_cost_str:>13}  **")
@@ -385,11 +391,12 @@ pay_date = CalcPayDate(INV_DATE)
 print(f"**  First Payment: {FF.FDateS(pay_date):>11}  **")
 print("**  --------------------------  **")
 
-print(f"**       Previous Claims:       **")
+print("**     **Previous Claims**      **")
+print(f"**  #      Date       Amount    **")
 for i in range(len(PrevClaimAmtLst)):
     claim_date_str = PrevClaimDateLst[i]
     claim_amt_str = FF.FDollar2(PrevClaimAmtLst[i])
-    print(f"**    {claim_date_str} - {claim_amt_str:>9}    **")
+    print(f"**  {i+1}. {claim_date_str} - {claim_amt_str:>9}   **")
 
 print("**  --------------------------  **")
 print()

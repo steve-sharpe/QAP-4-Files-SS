@@ -27,6 +27,9 @@ while True:
         runpy.run_path("QAP 4 Files ss/qap_4_monthly_sales.py")
     elif Choice == "Q":
         print()
-        print(" Until next time, 'We got you, baby'!")
+        print("    Until next time,")
+        print("  'We got you, baby'!")
+        print()
+        print("One Stop Insurance Company")
         print()
         break
