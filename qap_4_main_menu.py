@@ -22,9 +22,9 @@ while True:
             print("Invalid choice. Try again.")
 
     if Choice == "N":
-        runpy.run_path("QAP 4 Files ss/qap_4_new_policy.py")
+        runpy.run_path("qap_4_new_policy.py")
     elif Choice == "M":
-        runpy.run_path("QAP 4 Files ss/qap_4_monthly_sales.py")
+        runpy.run_path("qap_4_monthly_sales.py")
     elif Choice == "Q":
         print()
         print("    Until next time,")

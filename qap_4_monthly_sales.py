@@ -27,7 +27,7 @@ xaxis = [
     "JUN",
     "JUL",
     "AUG",
-    "SEPT",
+    "SEP",
     "OCT",
     "NOV",
     "DEC",
@@ -57,4 +57,4 @@ plt.legend()
 
 plt.show()
 
-runpy.run_path("QAP 4 Files ss/qap_4_main_menu.py")
+runpy.run_path("qap_4_main_menu.py")
